@@ -5,43 +5,16 @@
 
 
 
-var UserComponent = ng.core
+var AppComponent = ng.core
   .Component({
-    selector: "user",
-    inputs: ['profile'],
+    selector: "app",
     template:
     `
-      <div>
-        user: {{profile.name}}
-        <br />
-        status: {{profile.status}}
-        <br />
-        age: {{profile.age}}
-      </div>
+    <input [(ngModel)]='toast'/>{{toast}}
     `
   })
   .Class({
     constructor: function() {}
-  })
-
-var AppComponent = ng.core
-  .Component({
-    selector: "app",
-    directives: [UserComponent],
-    template:
-    `
-    <user [profile]="profile"></user>
-    `
-  })
-  .Class({
-    constructor: function() {
-      this.profile = {
-        name: 'Gregarious Gareth',
-        status: 'Married',
-        age: 0
-      }
-      setInterval(() => {this.profile.age ++}, 1000)
-    }
   })
 
 

@@ -8,12 +8,12 @@ var CatComponent = ng.core
     selector: "cat",
     template:
     `
-      {{catName}} Tiddles the Cat
+      <p>{{catName}}Tiddles the Cat is {{catAge}} today!!!</p>
     `
   })
   .Class({
     constructor: function() {
-
+      this.catAge = Math.floor(Math.random()*100)
     }
   })
 
@@ -21,15 +21,16 @@ var CatComponent = ng.core
 var AppComponent = ng.core
   .Component({
     selector: "app",
+    directives: [CatComponent],
     template:
     `
-      {{catName}}
       <cat></cat>
       <cat></cat>
       <cat></cat>
       <cat></cat>
-    `,
-    directives: [CatComponent]
+      <cat></cat>
+      <cat></cat>
+    `
   })
   .Class({
     constructor: function() {

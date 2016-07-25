@@ -1,29 +1,17 @@
 // * events: ['liked']
 // * this.liked = new ng.core.EventEmitter();
-// * this.liked.next();
+// * this.liked.emit();
 
 var LikeButtonComponent = ng.core
   .Component({
     selector: "like",
-    events: ['liked'],
     template:
     `
-      <a (click)="handleClick()">
-        Like?
-      </a>
     `
   })
   .Class({
     constructor: function() {
-      this.liked = new ng.core.EventEmitter();
       this.status = false;
-      this.handleClick = function() {
-        this.status = !this.status;
-        this.liked.emit({
-          status: this.status
-        });
-        console.log('clicked', this.status);
-      }
     }
   })
 

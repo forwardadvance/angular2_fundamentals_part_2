@@ -4,7 +4,7 @@
 // We won't be passing the cat into the component yet, we'll get to this in the next section.
 // Use the examples above to create an app component that contains three child components:
 
-// A Feader
+// A Header
 // A Cat
 // A Footer
 

@@ -16,12 +16,18 @@ var AppComponent = ng.core
     selector: "app",
     template:
     `
-
+      <a (click)="isVisible = !isVisible; color='red'">
+        <span bind-hidden="isVisible">show</span>
+        <span [hidden]="!isVisible">hide</span>
+      </a>
+      <hr />
+      <input [disabled]='isDisabled' [hidden]="isVisible" />
+      <p [textContent]="'Hello'" [style.color]="color"></p>
     `
   })
   .Class({
     constructor: function() {
-      this.isHidden = true;
+      this.isDisabled = this.isVisible = true;
       this.x = 'test';
       this.color = 'blue';
     }
