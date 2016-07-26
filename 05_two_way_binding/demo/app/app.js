@@ -1,7 +1,4 @@
-// inputs: ["profile"],
-// <user [profile]="'mikey'"></user>
-// <user profile="davey"></user>
-// <user profile="{{name}}"></user>
+// <input [(ngModel)]='toast'/>{{toast}}
 
 
 
@@ -10,11 +7,25 @@ var AppComponent = ng.core
     selector: "app",
     template:
     `
-    <input [(ngModel)]='toast'/>{{toast}}
+    <form (submit)="handleSubmit()">
+      <input [(ngModel)]="catName" />
+      {{catName}}
+      <input [value]="catName" (input)="handleInput($event)" />
+      <button>Go Now!</button>
+    </form>
     `
   })
   .Class({
-    constructor: function() {}
+    constructor: function() {
+      this.catName = "Miffy";
+      this.handleInput = (evt) => {
+        this.catName = evt.target.value;
+      }
+      this.handleSubmit = () => {
+        // AJAX
+        console.log(this.catName);
+      }
+    }
   })
 
 
@@ -24,76 +35,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // initial state
 
-// var UserComponent = ng.core
-//   .Component({
-//     selector: "user",
-//     template:
-//     `
-//       <div>
-//         user: {{profile}}
-//       </div>
-//     `
-//   })
-//   .Class({
-//     constructor: function() {}
-//   })
-
-// var AppComponent = ng.core
-//   .Component({
-//     selector: "app",
-//     directives: [UserComponent],
-//     template:
-//     `
-
-//     `
-//   })
-//   .Class({
-//     constructor: function() {
-//       var vm = this;
-//       vm.name = 'stewey'
-//     }
-//   })
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   ng.platform.browser.bootstrap(AppComponent, [])
-// });
-
-
-
-
-//target state
-// var UserComponent = ng.core
-//   .Component({
-//     selector: "user",
-//     inputs: ["profile"],
-//     template:
-//     `
-//       <div>
-//         user: {{profile}}
-//       </div>
-//     `
-//   })
-//   .Class({
-//     constructor: function() {}
-//   })
-
-// var AppComponent = ng.core
-//   .Component({
-//     selector: "app",
-//     directives: [UserComponent],
-//     template:
-//     `
-//       <user [profile]="'mikey'"></user>
-//       <user profile="mikey"></user>
-//     `
-//   })
-//   .Class({
-//     constructor: function() {
-//       var vm = this;
-//       vm.test = 'davey'
-//     }
-//   })
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   ng.platform.browser.bootstrap(AppComponent, [])
-// });
