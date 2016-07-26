@@ -5,13 +5,22 @@
 var LikeButtonComponent = ng.core
   .Component({
     selector: "like",
+    inputs: ['status'],
+    outputs: ['liked'],
     template:
     `
+      <a (click)="handleClick()">Liked: {{status}}</a>
     `
   })
   .Class({
     constructor: function() {
-      this.status = false;
+      // this.status = false;
+      this.liked = new ng.core.EventEmitter();
+      this.handleClick = () => {
+        this.status = !this.status
+        console.log('clicked', this.status);
+        this.liked.emit({status: this.status})
+      }
     }
   })
 
@@ -21,15 +30,18 @@ var AppComponent = ng.core
     directives: [LikeButtonComponent],
     template:
     `
-      <like (liked)="handleClick($event)"></like>
-      <div>{{message | json}}</div>
+      <like [status]="false" on-liked="message = $event"></like>
+      <pre>{{message | json}}</pre>
+      <div>{{message.status}}</div>
     `
   })
   .Class({
     constructor: function() {
+      this.message = {};
       this.handleClick = function(evt) {
-        console.log(evt, 'liked!!!!!');
-        this.message = evt;
+        // console.log(evt, 'liked!!!!!');
+        // this.message = evt;
+
       }
     }
   })
